@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+    <style>
+        body {
+            background: #eee;
+            max-width: 960px;
+            margin: 20px auto;
+        }
+        p, h3, h4, ul {
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            list-style-type: none;
+            background: #fff;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        li.fav {
+            background-color: #1c78ce;
+            color: white;
+        }
+        .box {
+            padding: 100px 0;
+            width: 400px;
+            text-align: center;
+            background-color: #ddd;
+            margin: 20px;
+            display: inline-block;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Hello Vue World</h1>
+    <div id="app">
+        <!-- We can actually build the Vue template directly in the .html document, which I think makes more sense anyway-->
+        
+        <button @click="showBooks = !showBooks">{{buttonMessage}}</button>
+        <!-- Fun fact:  V-if removes and creates elements in the DOM based on the condition specified-->
+        <ul v-if="showBooks">
+            <li v-for="book in favoriteBooks" :key="book.title" :class="{fav: book.isFav}" @click="toggleFav(book)">
+                <img :src="book.img" :alt="book.title" height="120" width="100">
+                <h4>{{book.title}}</h4> 
+                <p>by {{book.author}}</p>
+            </li>
+        </ul>
+        <!-- Whereas v-show only toggles the display style <= THis is more efficient if we need to toggle visibiilty often -->
+       <div v-show="showBooks"> Currently Showing Books</div>
+
+       <br>
+       <!-- Mouse Events-->
+       <!-- If we want to pass in a custom arg AND STILL get the event, we need to explicitly specify-->
+       <div @mouseover="handleEvent($event, 5)" class="box"> mouseover (enter)</div>
+       <div @mouseleave="handleEvent" class="box"> mouseleave</div>
+       <div @dblclick="handleEvent" class="box"> double click</div>
+       <div class="box" @mousemove="handleMousemove"> Position - ({{x}}, {{y}})</div>
+
+       <!-- Dynamic binding of attributes -->
+       <h4>Attribute Binding</h4>
+       <p>How we bind attributes from our Vue JS app to HTML Elements</p>
+       <a :href="url" target="_"> Coolest website ever</a>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

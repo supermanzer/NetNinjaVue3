@@ -1,0 +1,15 @@
+/**
+*  Globally defined style rules
+*/
+
+html, body {
+    font-family: "Raleway" sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+p {
+    font-style: italic;
+}
